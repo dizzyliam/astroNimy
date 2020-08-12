@@ -1,5 +1,3 @@
-import unittest
-import astroNimy/cfitsio
-import os
+import astroNimy
 
-var f = openImage("tests/2020jfo_stacked.fit", ReadOnly)
+let fits = loadFITS("tests/test.fit")

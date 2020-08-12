@@ -1,2 +1,2 @@
-import astroNimy/fitsIo
-export fitsIo
+import astroNimy/[fitsIO, utils]
+export fitsIO, utils
