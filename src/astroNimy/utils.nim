@@ -2,6 +2,7 @@ import fitsIO
 import nigui
 import math
 import arraymancer
+import dataTypes
 
 proc preview*(fits: FITS) = 
     app.init()
@@ -21,6 +22,12 @@ proc preview*(fits: FITS) =
         for y in 0..<fits.shape[1]:
             let value = floor(((fits.data[x, y]-mi).float/ma.float).float*255).int
             iCanvas.setPixel(x, y, rgb(value.byte, value.byte, value.byte))
+    
+    iCanvas.lineColor = rgb(255, 0, 0)
+    for i in fits.stars:
+        let size = i.pixelSize
+        let halfSize = size div 2
+        iCanvas.drawRectOutline(i.loc[0]-halfSize, i.loc[1]-halfSize, size, size)
 
     # Draw image according to scale
     var scale = 0.75

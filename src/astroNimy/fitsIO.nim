@@ -1,14 +1,9 @@
 import streams
 import tables
-import strutils
 import arraymancer
+import strutils
+import dataTypes
 import endians2
-
-type
-    FITS* = object
-        headers*: Table[string, string]
-        shape*: array[2, int]
-        data*: Tensor[uint16]
 
 proc getStr*(fits: FITS, key: string): string =
     return fits.headers[key]
