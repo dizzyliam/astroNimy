@@ -1,5 +1,4 @@
 import arraymancer
-import fitsIO
 import math
 import dataTypes
 import utils
@@ -29,5 +28,29 @@ proc blurAxis(data: Tensor[uint16], size: int): Tensor[uint16] =
     
     return tmpData
 
-proc boxBlur*(fits: var FITS, size: int = 4) =
-    fits.data = fits.data.blurAxis(size=size).transpose().blurAxis(size=size).transpose()
+proc boxBlur*(image: var Image, size: int = 4) =
+    image.data = image.data.blurAxis(size=size).transpose().blurAxis(size=size).transpose()
+
+proc bin*(image: var Image, size: int) =
+    var newImage = image
+    newImage.shape = [image.shape[0] div size, image.shape[1] div size]
+    newImage.data = newTensor[uint16](newImage.shape[0], newImage.shape[1])
+
+    for x in 0..<newImage.shape[0]:
+        for y in 0..<newImage.shape[1]:
+            var tmp: seq[uint64]
+            for a in 0..<size:
+                for b in 0..<size:
+                    try:
+                        tmp.add(image.data[(x*size)+a, (y*size)+b])
+                    except IndexError:
+                        continue
+            newImage.data[x, y] = (sum(tmp) div len(tmp).uint64).uint16
+    
+    image = newImage
+
+proc binEach*(imgSeq: var ImgSeq, size: int) =
+    for index in 0..<len(imgSeq.images):
+        imgSeq.images[index].bin(size)
+
+    

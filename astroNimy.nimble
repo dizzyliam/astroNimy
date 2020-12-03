@@ -11,5 +11,5 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 1.2.0"
-requires "nigui >= 0.2.0"
+requires "https://github.com/dizzyliam/NiGui"
 requires "arraymancer >= 0.5.0"

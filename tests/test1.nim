@@ -1,6 +1,6 @@
 import astroNimy
 
-var fits = loadFITS("tests/test.fit")
-fits.boxBlur()
-fits.register(maxStars=10)
-echo(fits.stars)
+var image = loadImage("tests/test.fit")
+image.boxBlur()
+image.register(maxStars=10)
+echo(image.stars)

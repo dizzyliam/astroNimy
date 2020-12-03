@@ -1,2 +1,2 @@
-import astroNimy/[fitsIO, utils, register, operations, dataTypes]
-export fitsIO, utils, register, operations, dataTypes
+import astroNimy/[fitsIO, utils, detect, operations, dataTypes, relate, track]
+export fitsIO, utils, detect, operations, dataTypes, relate, track
