@@ -23,8 +23,23 @@ type
     
     ImgSeq* = object
         images*: seq[Image]
+        transforms*: seq[Transform]
     
     Track* = seq[tuple[time: float, mag: float]]
+    
+    Transform* = object
+        scale*: float
+        rotation*: float
+        origin*: Loc
+        translation*: tuple[x, y: int]
+    
+proc `+`*(a, b: Loc): Loc = 
+    result.x = a.x + b.x
+    result.y = a.y + b.y
+
+proc `-`*(a, b: Loc): Loc = 
+    result.x = a.x - b.x
+    result.y = a.y - b.y
 
 proc hash*(x: Star): Hash =
     result = x.loc.hash !& x.pixelSize.hash
@@ -36,7 +51,7 @@ proc getStar*(image: Image, id: Hash): Star =
             return i
 
 proc exists*(star: Star): bool =
-    if star.id + star.loc.x + star.loc.y + star.pixelSize == 0:
+    if star.loc.x + star.loc.y + star.pixelSize == 0:
         return false
     else:
         return true

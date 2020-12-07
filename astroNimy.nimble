@@ -11,6 +11,6 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 1.2.0"
-requires "https://github.com/dizzyliam/NiGui"
+requires "https://github.com/trustable-code/NiGui@#head"
 requires "arraymancer >= 0.5.0"
 requires "ggplotnim >= 0.3.0"
